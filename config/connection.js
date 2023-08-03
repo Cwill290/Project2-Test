@@ -1,7 +1,8 @@
 const { Sequelize } = require('sequelize');
 
 const env = process.env.NODE_ENV || 'development';
-const config = require('./config')[env];
+const allConfigs = require('./config');
+const config = allConfigs[env] || allConfigs['development']; // Fallback to development
 
 // Check for JAWSDB_URL and update config if found
 if (process.env.JAWSDB_URL) {
@@ -25,3 +26,4 @@ const sequelize = config.use_env_variable
 })();
 
 module.exports = sequelize;
+
